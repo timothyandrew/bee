@@ -11,7 +11,7 @@ type Options struct {
 	NonGold []rune
 }
 
-func FindWords(d *Dictionary, o Options) {
+func FindWords(d *Dictionary, o Options) []string {
 	chars := append(o.NonGold, o.Gold)
 
 	words := FindWordsRec(d, chars, "")
@@ -20,13 +20,14 @@ func FindWords(d *Dictionary, o Options) {
 		return len(words[i]) < len(words[j])
 	})
 
-	i := 0
+	result := []string{}
 	for _, w := range words {
 		if strings.ContainsRune(w, o.Gold) && len(w) >= 4 {
-			i++
-			fmt.Printf("%d: %s\n", i, w)
+			result = append(result, w)
 		}
 	}
+
+	return result
 }
 
 func FindWordsRec(d *Dictionary, chars []rune, s string) []string {
