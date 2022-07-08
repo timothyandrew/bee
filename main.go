@@ -37,6 +37,10 @@ func main() {
 			return "{\"err\": \"Incorrect arg count\"}"
 		}
 
+		if args[0].String() == "" || args[1].String() == "" {
+			return "{\"err\": \"Empty args\"}"
+		}
+
 		gold := rune(strings.ToLower(args[0].String())[0])
 
 		nonGoldStr := strings.Split(args[1].String(), "")
